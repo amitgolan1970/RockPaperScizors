@@ -6,6 +6,10 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ public class RockPaperScizors extends AppCompatActivity implements View.OnClickL
     TextView rightTv, leftTv;
     Button startRollBtn, fromScratchBtn;
     Random rand = new Random();
+    Animation scaleAnim;
     int[] startPics, leftHandPics, rightHandPics;
     int leftPoints, rightPoints;
 
@@ -49,6 +54,7 @@ public class RockPaperScizors extends AppCompatActivity implements View.OnClickL
         rightHandPics = new int[] {
                 R.drawable.right_hand_rock, R.drawable.right_hand_paper, R.drawable.right_hand_scizors
         };
+        scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale_anim);
     }
 
     private void setListeners() {
@@ -103,26 +109,48 @@ public class RockPaperScizors extends AppCompatActivity implements View.OnClickL
         if(leftPicked.equals(rightPicked))
             return;
         if(leftPicked.equals(ItemEnum.ROCK)) {
-            if(rightPicked.equals(ItemEnum.SCIZORS))
+            if(rightPicked.equals(ItemEnum.SCIZORS)) {
                 leftPoints++;
-            else
+                rotateLeftImage();
+            }
+            else {
+                rotateRightImage();
                 rightPoints++;
+            }
         } else if(leftPicked.equals(ItemEnum.PAPER)) {
-            if(rightPicked.equals(ItemEnum.ROCK))
+            if(rightPicked.equals(ItemEnum.ROCK)) {
                 leftPoints++;
-            else
+                rotateLeftImage();
+            }
+            else {
+                rotateRightImage();
                 rightPoints++;
+            }
         } else if(leftPicked.equals(ItemEnum.SCIZORS)) {
-            if(rightPicked.equals(ItemEnum.PAPER))
+            if(rightPicked.equals(ItemEnum.PAPER)) {
+                rotateLeftImage();
                 leftPoints++;
-            else
+            }
+            else {
+                rotateRightImage();
                 rightPoints++;
+            }
         } else {
             System.err.println("SHOULD NEVER be here");
             return;
         }
         leftTv.setText(String.valueOf(leftPoints));
         rightTv.setText(String.valueOf(rightPoints));
+    }
+
+    private void rotateLeftImage() {
+        rightIv.setAnimation(null);
+        leftIv.startAnimation(scaleAnim);
+    }
+
+    private void rotateRightImage() {
+        leftIv.setAnimation(null);
+        rightIv.startAnimation(scaleAnim);
     }
 
     @Override

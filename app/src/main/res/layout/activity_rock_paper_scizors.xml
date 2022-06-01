@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
     tools:context=".RockPaperScizors">
 
     <ImageView
@@ -32,12 +33,15 @@
 
     <TextView
         android:id="@+id/tvLeftId"
-        android:layout_width="73dp"
-        android:layout_height="29dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_margin="5dp"
         android:ems="3"
         android:gravity="center"
         android:padding="5dp"
+        android:textColor="@color/teal_700"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.252"
@@ -47,12 +51,15 @@
 
     <TextView
         android:id="@+id/tvRightId"
-        android:layout_width="73dp"
-        android:layout_height="29dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_margin="5dp"
         android:ems="3"
         android:gravity="center"
         android:padding="5dp"
+        android:textColor="@color/teal_700"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.792"
